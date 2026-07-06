@@ -1,6 +1,6 @@
 # Multi-Agent Document Intelligence System
 
-A multi-agent AI system that analyzes documents (PDF, DOCX, TXT) using specialized agents that collaborate, critique each other's work, and self-correct — built with LangGraph, Groq (Llama 3.3), and local embeddings.
+A multi-agent AI system that analyzes documents (PDF, DOCX, TXT) using specialized agents that collaborate, critique each other's work, and self-correct, built with LangGraph, Groq (Llama 3.3), and local embeddings.
 
 ## What it does
 
@@ -8,24 +8,23 @@ Upload any document and four AI agents work together to:
 - **Summarize** it (executive + detailed summary)
 - **Extract** structured data (entities, dates, key facts) as JSON
 - **Answer questions** about it using Retrieval-Augmented Generation (RAG)
-- **Critique** the other agents' output for accuracy, completeness, and hallucinations — automatically triggering a retry if quality is low
+- **Critique** the other agents' output for accuracy, completeness, and hallucinations automatically triggering a retry if quality is low
 
 Includes OCR fallback for scanned/image-based PDFs using Tesseract.
 
 ## Architecture
 
-                        ┌──────────────┐
-                        │ Orchestrator │  (LangGraph state machine)
-                        └──────┬───────┘
-                               │
-        ┌──────────────┬──────┴───────┬──────────────┐
-        ▼              ▼              ▼              ▼
-  ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌───────────┐
-  │Summarizer │─ │  Critic   │─ │ Extractor │  │  QA (RAG) │
-  └───────────┘  └───────────┘  └───────────┘  └───────────┘
-                       │
-                       │ needs_revision?
-                       └──────▶ retry Summarizer (max 2x)
+        Orchestrator (LangGraph)
+        │
+        ├──▶ Summarizer
+        │        │
+        │        ▼
+        ├──▶   Critic ──▶ needs_revision? ──▶ retry Summarizer (max 2x)
+        │        │
+        │        ▼ (approved)
+        ├──▶ Extractor
+        │
+        └──▶ QA (RAG)
 
 ## Tech Stack
 
@@ -69,4 +68,4 @@ streamlit run main.py
 
 ## Notes
 
-This project was built to explore multi-agent orchestration patterns — specifically, having one agent review and trigger retries on another agent's output, rather than a single linear pipeline.
+This project was built to explore multi-agent orchestration patterns specifically, having one agent review and trigger retries on another agent's output, rather than a single linear pipeline.
