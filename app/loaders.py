@@ -6,7 +6,11 @@ import io
 from typing import List
 
 # Point pytesseract to your Tesseract install (adjust path if yours differs)
-pytesseract.pytesseract.tesseract_cmd = r"C:\Users\simpl\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
+import platform
+
+if platform.system() == "Windows":
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Users\simpl\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
+# On Linux (Streamlit Cloud), tesseract-ocr installs to system PATH automatically — no path needed
 
 MIN_TEXT_LENGTH = 50  # if extracted text is shorter than this, assume it's a scanned PDF
 

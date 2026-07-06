@@ -8,3 +8,5 @@ python-docx
 streamlit
 python-dotenv
 pydantic
+pytesseract
+pillow
