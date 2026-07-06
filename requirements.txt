@@ -8,5 +8,7 @@ python-docx
 streamlit
 python-dotenv
 pydantic
+groq
 pytesseract
 pillow
+sentence-transformers
