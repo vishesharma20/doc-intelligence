@@ -14,17 +14,18 @@ Includes OCR fallback for scanned/image-based PDFs using Tesseract.
 
 ## Architecture
 
-                ┌──────────────┐
-                │ Orchestrator │  (LangGraph state machine)
-                └──────┬───────┘
-    ┌──────────────────┼──────────────────┬─────────────┐
-    ▼                  ▼                  ▼             ▼
-┌───────────┐     ┌─────────────┐    ┌────────────┐  ┌──────────┐
-│ Summarizer│     │   Critic    │    │  Extractor │  │    QA    │
-└───────────┘     └─────────────┘    └────────────┘  │  (RAG)   │
-                                                     └──────────┘
-needs_revision?
-retry Summarizer (max 2x)
+                        ┌──────────────┐
+                        │ Orchestrator │  (LangGraph state machine)
+                        └──────┬───────┘
+                               │
+        ┌──────────────┬──────┴───────┬──────────────┐
+        ▼              ▼              ▼              ▼
+  ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌───────────┐
+  │Summarizer │─ │  Critic   │─ │ Extractor │  │  QA (RAG) │
+  └───────────┘  └───────────┘  └───────────┘  └───────────┘
+                       │
+                       │ needs_revision?
+                       └──────▶ retry Summarizer (max 2x)
 
 ## Tech Stack
 
