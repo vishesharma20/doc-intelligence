@@ -4,7 +4,15 @@ from dotenv import load_dotenv
 from groq import Groq
 
 load_dotenv()
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+import streamlit as st
+
+def get_groq_key():
+    try:
+        return st.secrets["GROQ_API_KEY"]
+    except Exception:
+        return os.getenv("GROQ_API_KEY")
+
+client = Groq(api_key=get_groq_key())
 
 CRITIC_PROMPT = """You are a quality-control agent reviewing another AI agent's output against the source document.
 
