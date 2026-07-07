@@ -27,7 +27,7 @@ Upload any document and four AI agents work together to:
 - **Summarize** it (executive + detailed summary)
 - **Extract** structured data (entities, dates, key facts) as JSON
 - **Answer questions** about it in a chat interface using Retrieval-Augmented Generation (RAG)
-- **Critique** the other agents' output for accuracy, completeness, and hallucinations — automatically triggering a retry if quality is low
+- **Critique** the other agents' output for accuracy, completeness, and hallucinations, automatically triggering a retry if quality is low
 
 Includes OCR fallback for scanned/image-based PDFs using Tesseract.
 
