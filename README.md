@@ -16,7 +16,7 @@ A multi-agent AI system that analyzes documents (PDF, DOCX, TXT) using specializ
 ![Q&A](screenshots/q&a.png)
 
 **Quality review (expanded)**
-![Quality review notes](screenshots/quality-review.png)
+![Quality review notes](screenshots/quality-review-notes.png)
 
 **Extracted data (expanded)**
 ![Extracted data](screenshots/extracted-data.png)
@@ -49,7 +49,7 @@ Orchestrator (LangGraph)
 
 ## Tech Stack
 
-- **LLM**: Groq API (Llama 3.3 70B) — free tier
+- **LLM**: Groq API (Llama 3.3 70B) - free tier
 - **Orchestration**: LangGraph
 - **Embeddings**: sentence-transformers (local, free)
 - **Vector store**: ChromaDB
@@ -99,4 +99,4 @@ Orchestrator (LangGraph)
 
 ## Notes
 
-This project was built to explore multi-agent orchestration patterns — specifically, having one agent review and trigger retries on another agent's output, rather than a single linear pipeline.
+This project was built to explore multi-agent orchestration patterns, specifically, having one agent review and trigger retries on another agent's output, rather than a single linear pipeline.
