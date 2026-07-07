@@ -1,7 +1,12 @@
 import os
 from dotenv import load_dotenv
 from groq import Groq
-from app.agents.vectorstore import add_chunks, query_chunks
+from app.agents.vectorstore import add_chunks, query_chunks, clear_collection
+
+def index_document(chunks: list[str]):
+    """Call this once per document to load it into the vector store."""
+    clear_collection()
+    add_chunks(chunks)
 
 load_dotenv()
 import streamlit as st
@@ -53,3 +58,22 @@ if __name__ == "__main__":
     question = "What is this document about?"
     answer = ask(question)
     print(f"Q: {question}\nA: {answer}")
+
+SMALL_TALK = {"hi", "hello", "hey"}
+
+def ask(question: str) -> str:
+    if question.strip().lower().rstrip("!.?") in SMALL_TALK:
+        return "Hi! Ask me anything about the document you uploaded."
+
+    relevant_chunks = query_chunks(question)
+    context = "\n\n".join(relevant_chunks)
+
+    prompt = QA_PROMPT.format(context=context, question=question)
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0
+    )
+
+    return response.choices[0].message.content.strip()

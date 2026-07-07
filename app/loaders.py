@@ -16,7 +16,7 @@ MIN_TEXT_LENGTH = 50  # if extracted text is shorter than this, assume it's a sc
 
 def load_pdf(path: str) -> str:
     doc = fitz.open(path)
-    text = "\n".join(page.get_text() for page in doc)
+    text = "\n".join(page.get_text() for page in doc) 
 
     if len(text.strip()) < MIN_TEXT_LENGTH:
         print("[Loader] Little/no text found — falling back to OCR...")
