@@ -1,6 +1,6 @@
 # Multi-Agent Document Intelligence System
 
-A multi-agent AI system that analyzes documents (PDF, DOCX, TXT) using specialized agents that collaborate, critique each other's work, and self-correct — built with LangGraph, Groq (Llama 3.3), and local embeddings.
+A multi-agent AI system that analyzes documents (PDF, DOCX, TXT) using specialized agents that collaborate, critique each other's work, and self-correct, built with LangGraph, Groq (Llama 3.3), and local embeddings.
 
 **Live demo:** [doc-intelligence-vishesh99.streamlit.app](https://doc-intelligence-vishesh99.streamlit.app/)
 
